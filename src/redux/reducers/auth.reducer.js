@@ -6,6 +6,9 @@ import {
   GET_USER_SUCCESS,
   UPDATE_DETAILS,
   UPDATE_DETAILS_SUCCESS,
+  FORGOT_PASSWORD,
+  FORGOT_PASSWORD_SUCCESS,
+  RESET_PASSWORD_SUCCESS,
 } from '../actions/auth.actions';
 import {
   UPLOAD_AVATAR,
@@ -91,6 +94,23 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+      };
+    case FORGOT_PASSWORD:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+      };
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+      };
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loaded: false,
       };
     default:
       return state;

@@ -53,3 +53,34 @@ export const updateDetailsSuccess = (payload) => {
     payload,
   };
 };
+
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
+
+export const forgotPassword = (payload) => {
+  return {
+    type: FORGOT_PASSWORD,
+    payload,
+  };
+};
+export const forgotPasswordSuccess = () => {
+  return {
+    type: FORGOT_PASSWORD_SUCCESS,
+  };
+};
+
+export const RESET_PASSWORD = 'RESET_PASSWORD';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+
+export const resetPassword = (resetToken, payload) => {
+  return {
+    type: RESET_PASSWORD,
+    resetToken,
+    payload,
+  };
+};
+export const resetPasswordSuccess = () => {
+  return {
+    type: RESET_PASSWORD_SUCCESS,
+  };
+};

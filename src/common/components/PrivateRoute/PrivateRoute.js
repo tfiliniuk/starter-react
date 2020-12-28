@@ -2,12 +2,12 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export const PrivateRoute = ({ component: Component, ...rest }) => {
+export const PrivateRoute = ({ component: Component, exact, ...rest }) => {
   const auth = useSelector((state) => state.auth);
 
   return (
     <Route
-      {...rest}
+      exact={exact}
       render={(props) => {
         if (!auth.isSigned) {
           return (
@@ -16,7 +16,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
             />
           );
         } else {
-          return <Component {...props} />;
+          return <Component {...props} {...rest} />;
         }
       }}
     />

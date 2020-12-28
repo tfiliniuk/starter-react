@@ -7,8 +7,8 @@ import { logout } from '../../redux/actions/auth.actions';
 const refreshToken = localStorageService.getRefreshToken();
 
 export const axiosBase = axios.create({
-  // baseURL: 'http://localhost:5000',
-  baseURL: 'https://app-starter-node.herokuapp.com',
+  baseURL: 'http://localhost:5000',
+  // baseURL: 'https://app-starter-node.herokuapp.com',
 });
 
 axiosBase.interceptors.request.use(

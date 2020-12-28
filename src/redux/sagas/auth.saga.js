@@ -9,7 +9,10 @@ import {
   LOGOUT_USER,
   UPDATE_DETAILS,
   updateDetailsSuccess,
-  updateDetails,
+  FORGOT_PASSWORD,
+  forgotPasswordSuccess,
+  RESET_PASSWORD,
+  resetPasswordSuccess,
 } from '../actions/auth.actions';
 
 import ApiBase from '../../common/api/api.base';
@@ -53,9 +56,32 @@ function* updatedUser(action) {
   } catch (error) {}
 }
 
+function* workerForgotPassword(action) {
+  try {
+    yield call(ApiBase.post, '/auth/forgot-password', action.payload);
+    yield put(forgotPasswordSuccess());
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* workerResetPassword(action) {
+  try {
+    const result = yield call(
+      ApiBase.put,
+      `/auth/reset-password/${action.resetToken}`,
+      action.payload
+    );
+    yield put(resetPasswordSuccess());
+    yield put(push('/login'));
+  } catch (error) {}
+}
+
 export function* watchAuthSaga() {
   yield takeEvery(LOGIN_USER, login);
   yield takeEvery(GET_USER, getUser);
   yield takeEvery(LOGOUT_USER, logout);
   yield takeEvery(UPDATE_DETAILS, updatedUser);
+  yield takeEvery(FORGOT_PASSWORD, workerForgotPassword);
+  yield takeEvery(RESET_PASSWORD, workerResetPassword);
 }
